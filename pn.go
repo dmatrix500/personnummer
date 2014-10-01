@@ -27,15 +27,20 @@ func (p pnImpl) Valid() bool {
 	return calcChecksum(p.birth, p.nummer) == p.checksum
 }
 
-// IsFemale returns true if personnummber describes a female person, false
-// if it describes a male person
+// IsFemale returns true if the person is female and
+// false if the person is male.
 func (p pnImpl) IsFemale() bool {
 	return p.nummer%2 == 0
 }
 
-// BirthDate returns the birth date of the person.
+// BirthDate returns the person's birth date.
 func (p pnImpl) BirthDate() time.Time {
 	return p.birth
+}
+
+// Age returns the person's Age in years.
+func (p pnImpl) Age() int {
+	return int(time.Since(p.birth).Hours() / 8765.81)
 }
 
 func (p pnImpl) Nummer() int {

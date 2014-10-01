@@ -21,6 +21,9 @@ type Personnummer interface {
 	// Returns the birthdate contained in the person nummer.
 	BirthDate() time.Time
 
+	// Age returns the person's age in years
+	Age() int
+
 	// Returns the running number contained in the person nummer.
 	Nummer() int
 
