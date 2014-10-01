@@ -11,7 +11,8 @@ type pnImpl struct {
 }
 
 // NewPersonnummer returns a new personnummer from the given birthdate and
-// running number with the checksum initialized accordingly.
+// running number with the checksum initialized accordingly. Use Parse(string)
+// to parse a comlete personnummer.
 func NewPersonnummer(birthdate time.Time, runningNummer int) Personnummer {
 	p := &pnImpl{
 		birth:  birthdate,
@@ -32,7 +33,7 @@ func (p pnImpl) IsFemale() bool {
 	return p.nummer%2 == 0
 }
 
-// BirthDate returns the birth date of the person
+// BirthDate returns the birth date of the person.
 func (p pnImpl) BirthDate() time.Time {
 	return p.birth
 }
