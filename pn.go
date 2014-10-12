@@ -22,6 +22,10 @@ func NewPersonnummer(birthdate time.Time, runningNummer int) Personnummer {
 	return p
 }
 
+func NewEmptyPN() Personnummer {
+	return &pnImpl{}
+}
+
 // Valid returns true if the personnummer is valid.
 func (p pnImpl) Valid() bool {
 	return calcChecksum(p.birth, p.nummer) == p.checksum
