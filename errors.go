@@ -5,5 +5,5 @@ package personnummer
 type FormatError string
 
 func (e FormatError) Error() string {
-	return "invalid format: " + string(e)
+	return "personnummer: invalid format: " + string(e)
 }

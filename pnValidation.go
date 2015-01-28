@@ -1,7 +1,6 @@
 package personnummer
 
 import (
-	//"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -12,7 +11,7 @@ func calcChecksum(birth time.Time, nummer int) int {
 	numSing := nummer % 10
 	numCent := nummer / 100
 	numDez := nummer/10 - 10*numCent
-	//fmt.Printf("nummer %d: %d %d %d\n", nummer, numCent, numDez, numSing)
+	// fmt.Printf("nummer %d: %d %d %d\n", nummer, numCent, numDez, numSing)
 
 	var calcs = map[int][]int{
 		1: []int{
@@ -95,7 +94,7 @@ func (p *pnImpl) Parse(pn string) error {
 		// long year, with dash
 		date, nummerString, checkString, err = splitSign(pn)
 	default:
-		return FormatError("wrong length, should be 10,12,13 or 14 is" + strconv.Itoa(len(pn)))
+		return FormatError("wrong length, should be 10-13, but is " + strconv.Itoa(len(pn)))
 	}
 
 	if err != nil {
