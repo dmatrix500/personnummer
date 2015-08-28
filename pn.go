@@ -5,9 +5,10 @@ import (
 )
 
 type pnImpl struct {
-	birth    time.Time
-	nummer   int
-	checksum int
+	birth     time.Time
+	nummer    int
+	checksum  int
+	separator string
 }
 
 // NewPersonnummer returns a new personnummer from the given birthdate and
@@ -49,4 +50,10 @@ func (p pnImpl) Age() int {
 
 func (p pnImpl) Nummer() int {
 	return p.nummer
+}
+
+// Separator specifies which character separates the parts of the ssn
+// during unmarshalling. Defaults to "".
+func (p *pnImpl) Separator(s string) {
+	p.separator = s
 }

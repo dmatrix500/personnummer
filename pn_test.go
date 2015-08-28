@@ -136,8 +136,8 @@ func TestString(t *testing.T) {
 		if !Compare(t, pn, pt) {
 			t.Fatalf("NewPersonnummer failed %d: %v", i, pn)
 		}
-		if pn.String() != pt.formats[2] {
-			t.Fatalf("String returned wrong: should be %s is %s", pn.String(), pt.formats[2])
+		if pn.String() != pt.formats[0] {
+			t.Fatalf("String returned wrong: should be %s is %s", pn.String(), pt.formats[0])
 		}
 	}
 

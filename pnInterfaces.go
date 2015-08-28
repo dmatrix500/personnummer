@@ -27,6 +27,9 @@ type Personnummer interface {
 	// Returns the running number contained in the person nummer.
 	Nummer() int
 
+	// Set which separator to use between parts when unmarshalling.
+	Separator(string)
+
 	// fmt.Stringer
 	String() string
 
@@ -46,7 +49,7 @@ type Personnummer interface {
 // pnImpl implements fmt.Stringer
 func (p pnImpl) String() string {
 	// The p.nummer parameter must be padded with zeros in case the personnummer ends with, for example, 0091.
-	return fmt.Sprintf("%s-%03d%d", p.birth.Format("20060102"), p.nummer, p.checksum)
+	return fmt.Sprintf("%s%s%03d%d", p.birth.Format("20060102"), p.separator, p.nummer, p.checksum)
 }
 
 // Value implements sql/driver.Valuer.
