@@ -74,25 +74,25 @@ func splitSign(pn string) (date string, nummer string, check string, err error) 
 // the returned error is FormatError if the format does not fit or an error
 // returned by the time.Parse or strconv.Atoi functions called during parsing.
 func (p *pnImpl) Parse(pn string) error {
-	var date, nummerString, checkString string
+	var date, numberString, checkString string
 	var err error
 	var shortDate bool
 
 	switch len(pn) {
 	case 12:
 		// long year, no dash
-		date, nummerString, checkString = pn[:8], pn[8:11], pn[11:]
+		date, numberString, checkString = pn[:8], pn[8:11], pn[11:]
 	case 10:
 		// short year, no dash
-		date, nummerString, checkString = pn[:6], pn[6:9], pn[9:]
+		date, numberString, checkString = pn[:6], pn[6:9], pn[9:]
 		shortDate = true
 	case 11:
 		// short year, with dash
-		date, nummerString, checkString, err = splitSign(pn)
+		date, numberString, checkString, err = splitSign(pn)
 		shortDate = true
 	case 13:
 		// long year, with dash
-		date, nummerString, checkString, err = splitSign(pn)
+		date, numberString, checkString, err = splitSign(pn)
 	default:
 		return FormatError("wrong length, should be 10-13, but is " + strconv.Itoa(len(pn)))
 	}
@@ -101,24 +101,24 @@ func (p *pnImpl) Parse(pn string) error {
 		return err
 	}
 	if !shortDate {
-		if p.birth, err = time.Parse("20060102", date); err != nil {
+		if p.Birth, err = time.Parse("20060102", date); err != nil {
 			return err
 		}
 	} else {
-		if p.birth, err = time.Parse("060102", date); err != nil {
+		if p.Birth, err = time.Parse("060102", date); err != nil {
 			return err
 		}
 	}
 
-	if p.birth.Year() > time.Now().Year() {
-		p.birth = time.Date(p.birth.Year()-100, p.birth.Month(), p.birth.Day(), 0, 0, 0, 0, time.UTC)
+	if p.Birth.Year() > time.Now().Year() {
+		p.Birth = time.Date(p.Birth.Year()-100, p.Birth.Month(), p.Birth.Day(), 0, 0, 0, 0, time.UTC)
 	}
 
-	if p.nummer, err = strconv.Atoi(nummerString); err != nil {
+	if p.RunningNumber, err = strconv.Atoi(numberString); err != nil {
 		return err
 	}
 
-	if p.checksum, err = strconv.Atoi(checkString); err != nil {
+	if p.Checksum, err = strconv.Atoi(checkString); err != nil {
 		return err
 	}
 

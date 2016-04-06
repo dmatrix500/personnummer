@@ -75,8 +75,8 @@ func Compare(t *testing.T, pn Personnummer, p pt) bool {
 		t.Errorf("nummer not matching: should be %3d is %3d", p.nummer, pn.Nummer())
 		return false
 	}
-	if pn.(*pnImpl).checksum != p.checksum {
-		t.Errorf("checksum not matching: should be %1d is %1d", p.checksum, pn.(*pnImpl).checksum)
+	if pn.(*pnImpl).Checksum != p.checksum {
+		t.Errorf("checksum not matching: should be %1d is %1d", p.checksum, pn.(*pnImpl).Checksum)
 		return false
 	}
 	if pn.IsFemale() != p.female {
